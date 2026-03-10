@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>To-Do List</title>
+
+<style>
+body{
+font-family: Arial;
+text-align:center;
+margin-top:40px;
+}
+
+input{
+padding:8px;
+}
+
+button{
+padding:8px;
+margin-left:5px;
+}
+
+li{
+margin:10px;
+cursor:pointer;
+}
+
+.completed{
+text-decoration: line-through;
+color: gray;
+}
+</style>
+
+</head>
+
+<body>
+
+<h2>My To-Do List</h2>
+
+<input id="task" placeholder="Enter task">
+<button onclick="addTask()">Add</button>
+
+<ul id="list"></ul>
+
+<script>
+
+loadTasks()
+
+function addTask(){
+
+let task=document.getElementById("task").value
+
+if(task==""){
+alert("Enter a task")
+return
+}
+
+let li=document.createElement("li")
+
+li.textContent=task
+
+li.onclick=function(){
+li.classList.toggle("completed")
+saveTasks()
+}
+
+let deleteBtn=document.createElement("button")
+deleteBtn.textContent="Delete"
+deleteBtn.onclick=function(){
+li.remove()
+saveTasks()
+}
+
+li.appendChild(deleteBtn)
+
+document.getElementById("list").appendChild(li)
+
+document.getElementById("task").value=""
+
+saveTasks()
+
+}
+
+function saveTasks(){
+
+localStorage.setItem("tasks",document.getElementById("list").innerHTML)
+
+}
+
+function loadTasks(){
+
+document.getElementById("list").innerHTML=localStorage.getItem("tasks") || ""
+
+}
+
+</script>
+
+</body>
+</html>
