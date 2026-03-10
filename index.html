@@ -5,39 +5,70 @@
 
 <style>
 body{
-font-family: Arial;
+font-family: Arial, sans-serif;
+background:#f4f6f8;
+display:flex;
+justify-content:center;
+align-items:center;
+height:100vh;
+}
+
+.container{
+background:white;
+padding:25px;
+border-radius:10px;
+box-shadow:0 5px 15px rgba(0,0,0,0.2);
+width:350px;
 text-align:center;
-margin-top:40px;
 }
 
 input{
+width:70%;
 padding:8px;
+border:1px solid #ccc;
+border-radius:5px;
 }
 
 button{
-padding:8px;
+padding:8px 10px;
 margin-left:5px;
-}
-
-li{
-margin:10px;
+background:#4CAF50;
+color:white;
+border:none;
+border-radius:5px;
 cursor:pointer;
 }
 
+button:hover{
+background:#45a049;
+}
+
+li{
+margin:10px 0;
+padding:8px;
+background:#f0f0f0;
+border-radius:5px;
+display:flex;
+justify-content:space-between;
+}
+
 .completed{
-text-decoration: line-through;
-color: gray;
+text-decoration:line-through;
+color:gray;
 }
 </style>
 
 </head>
 
 <body>
+ <div class="container">
 
 <h2>My To-Do List</h2>
 
 <input id="task" placeholder="Enter task">
 <button onclick="addTask()">Add</button>
+<button onclick="clearTasks()">Clear All</button>
+
 
 <ul id="list"></ul>
 
@@ -91,8 +122,15 @@ function loadTasks(){
 document.getElementById("list").innerHTML=localStorage.getItem("tasks") || ""
 
 }
+  function clearTasks(){
+document.getElementById("list").innerHTML=""
+localStorage.removeItem("tasks")
+}
+
 
 </script>
+ </div>
 
 </body>
+
 </html>
